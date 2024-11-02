@@ -1,5 +1,9 @@
-version: '3.8'
- 
+#
+# Docker compose Datenbank und Webserver
+#
+# docker compose up -d
+# Datenbank init, aktiviere volumes sql-init/ticket.sql - setzt die Daten immer zurück auf Testdaten 
+#
 services:
   db:
     image: mariadb:latest
@@ -7,25 +11,24 @@ services:
     environment:
       MARIADB_ROOT_PASSWORD: 1234
       MARIADB_DATABASE: ticketsystem
-      MARIADB_USER: my_user
-      MARIADB_PASSWORD: my_user_password
+    ports:
+      - "8099:3306"
     volumes:
-      - C:\Program Files\MariaDB 11.3\data:/var/lib/mysql
+      - ./mariadbdata:/var/lib/mysql
+#      - ./sql-init/ticket.sql:/docker-entrypoint-initdb.d/init.sql
+#      - C:\Program Files\MariaDB 11.3\data:/var/lib/mysql
     networks:
       - website
- 
+
   web:
     image: trafex/php-nginx
     container_name: Website
     ports:
       - "8088:8080"
     volumes:
-      - C:\Users\nelo07\source\repos\Docker_347:/var/www/html
+      - ./html:/var/www/html
     networks:
       - website
- 
-volumes:
- ticketsystem_data:
- 
+
 networks:
   website:

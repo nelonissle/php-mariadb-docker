@@ -15,6 +15,17 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+DROP DATABASE IF EXISTS ticketsystem;
+CREATE DATABASE IF NOT EXISTS ticketsystem CHARACTER SET = 'latin1';
+
+grant all privileges on *.* to 'root'@'%' with grant option; 
+
+CREATE USER IF NOT EXISTS 'ticketadmin'@'%' IDENTIFIED BY '1234';
+
+GRANT ALL PRIVILEGES ON ticketsystem.* TO 'ticketadmin'@'%';
+
+USE ticketsystem;
+
 --
 -- Table structure for table `tickets`
 --
@@ -23,27 +34,25 @@ DROP TABLE IF EXISTS `tickets`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tickets` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
   `name` varchar(100) NOT NULL,
   `message` text NOT NULL,
   `topic` varchar(100) NOT NULL,
   `captcha` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `tickets`
 --
 
-LOCK TABLES `tickets` WRITE;
 /*!40000 ALTER TABLE `tickets` DISABLE KEYS */;
 INSERT INTO `tickets` VALUES
 (1,'asd','asd','asd','asd','asd'),
 (2,'haha','huhu','hehe','baba','fdaf');
 /*!40000 ALTER TABLE `tickets` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
