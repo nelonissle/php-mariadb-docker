@@ -4,10 +4,11 @@
 # docker compose up -d
 # Datenbank init, aktiviere volumes sql-init/ticket.sql - setzt die Daten immer zurück auf Testdaten 
 #
+name: Ticketsystem
 services:
   db:
     image: mariadb:latest
-    container_name: ticketsystem
+    container_name: Datenbank
     environment:
       MARIADB_ROOT_PASSWORD: 1234
       MARIADB_DATABASE: ticketsystem
@@ -15,7 +16,7 @@ services:
       - "8099:3306"
     volumes:
       - ./mariadbdata:/var/lib/mysql
-#      - ./sql-init/ticket.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./sql-init/ticket.sql:/docker-entrypoint-initdb.d/init.sql
 #      - C:\Program Files\MariaDB 11.3\data:/var/lib/mysql
     networks:
       - website
