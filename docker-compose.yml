@@ -26,7 +26,7 @@ services:
     image: trafex/php-nginx
     container_name: Website
     ports:
-      - "8088:8080"
+      - "8090:8080"
     volumes:
       - ./html:/var/www/html
     networks:
